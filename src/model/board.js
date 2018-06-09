@@ -1,4 +1,11 @@
 function sum(a, b) {
   return a + b;
 }
-module.exports = sum;
+
+class BoardModel {
+  constructor(rows) {
+    this.rows = rows;
+  }
+}
+
+module.exports = BoardModel;

@@ -1,5 +1,12 @@
-import sum from './board';
+import BoardModel from './board';
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(sum(1, 2)).toBe(3);
+test('keeps track of rows', () => {
+  const testMe = new BoardModel([
+    'oxo',
+    'o  ',
+    ' xx']);
+  expect(testMe.rows).toEqual([
+    'oxo',
+    'o  ',
+    ' xx']);
 });
