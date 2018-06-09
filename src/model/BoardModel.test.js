@@ -1,4 +1,4 @@
-import BoardModel from './board';
+import BoardModel from './BoardModel';
 
 test('keeps track of rows', () => {
   const testMe = new BoardModel([
