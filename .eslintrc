@@ -2,6 +2,7 @@
   "extends": "react-app",
   "rules": {
     "curly": "warn",
-    "semi": [ERROR, 'always']
+    "semi": [ERROR, 'always'],
+    "valid-jsdoc": "warn"
   }
 }
