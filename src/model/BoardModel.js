@@ -1,14 +1,18 @@
+// @flow
+
 import Move from './Move';
 
 class BoardModel {
-  constructor(rows) {
+  rows: Array<string>;
+
+  constructor(rows: Array<string>) {
     this.rows = rows;
   }
 
   /*
   * player - 'x' or 'o'
   */
-  suggestMove(player) {
+  suggestMove(player: string) {
     return new Move(player, 0, 0, null, null);
   }
 
@@ -19,7 +23,7 @@ class BoardModel {
   * column - column index to update, 0, 1 or 2
   * player - 'x', 'o' or ' '
   */
-  _setColumn(baseRow, column, player) {
+  _setColumn(baseRow: string, column: number, player: string) {
     return baseRow.substr(0, column) + player + baseRow.substr(column + 1);
   }
 
@@ -28,7 +32,7 @@ class BoardModel {
   *
   * move - the move to apply
   */
-  withMove(move) {
+  withMove(move: Move) {
     let newRows = this.rows.slice();
 
     newRows[move.toRow] =

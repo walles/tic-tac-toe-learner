@@ -1,4 +1,13 @@
+// @flow
 class Move {
+  player: string;
+
+  toColumn: number;
+  toRow: number;
+
+  fromColumn: ?number;
+  fromRow: ?number;
+
   /*
   * player - 'x' or 'o'
   * toColumn - Move destination column, 0, 1 or 2
@@ -6,7 +15,10 @@ class Move {
   * fromColumn - Move destination column, can be null
   * fromRow - Move destination row, can be null
   */
-  constructor(player, toColumn, toRow, fromColumn, fromRow) {
+  constructor(player: string,
+    toColumn: number, toRow: number,
+    fromColumn: ?number, fromRow: ?number)
+  {
     this.player = player;
 
     this.toColumn = toColumn;
