@@ -1,10 +1,10 @@
 class Move {
-  /**
-  * @param {String} player 'x' or 'o'
-  * @param {Number} toColumn Move destination column
-  * @param {Number} toRow Move destination row
-  * @param {Number} fromColumn Move destination column, can be null
-  * @param {Number} fromRow Move destination row, can be null
+  /*
+  * player - 'x' or 'o'
+  * toColumn - Move destination column, 0, 1 or 2
+  * toRow - Move destination row, 0, 1 or 2
+  * fromColumn - Move destination column, can be null
+  * fromRow - Move destination row, can be null
   */
   constructor(player, toColumn, toRow, fromColumn, fromRow) {
     this.player = player;

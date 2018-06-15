@@ -5,27 +5,28 @@ class BoardModel {
     this.rows = rows;
   }
 
-  /**
-  * @param {string} player 'x' or 'o'
-  * @return {Move} the best move for the given player
+  /*
+  * player - 'x' or 'o'
   */
   suggestMove(player) {
     return new Move(player, 0, 0, null, null);
   }
 
-  /**
-  @param {String} baseRow The row to update
-  @param {Number} column The column to modify
-  @param {String} player 'x' or 'o'
-  @return {String} The modified row
+  /*
+  * Returns a modified row
+  *
+  * row - Three letter row string to update, can contain 'x', 'o' or ' '
+  * column - column index to update, 0, 1 or 2
+  * player - 'x', 'o' or ' '
   */
   _setColumn(baseRow, column, player) {
     return baseRow.substr(0, column) + player + baseRow.substr(column + 1);
   }
 
-  /**
-  * @param {Move} move the move to apply
-  * @return {BoardModel} a new board with the given move applied
+  /*
+  * Returns a new board with the given move applied
+  *
+  * move - the move to apply
   */
   withMove(move) {
     let newRows = this.rows.slice();
