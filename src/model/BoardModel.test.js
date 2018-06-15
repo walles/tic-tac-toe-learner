@@ -27,6 +27,20 @@ test('makes basic move', () => {
     '   ']);
 });
 
+test('can move a mark', () => {
+  const baseBoard = new BoardModel([
+    '   ',
+    '  o',
+    '   ']);
+  const move = new Move('o', 1, 1, 2, 1);
+  const newBoard = baseBoard.withMove(move);
+
+  expect(newBoard.rows).toEqual([
+    '   ',
+    ' o ',
+    '   ']);
+});
+
 test('suggests moving to free spots', () => {
   const board = new BoardModel([
     'xox',

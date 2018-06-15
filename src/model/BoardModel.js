@@ -103,6 +103,14 @@ class BoardModel {
     newRows[move.toRow] =
       this._setColumn(newRows[move.toRow], move.toColumn, move.player);
 
+    const fromColumn = move.fromColumn;
+    const fromRow = move.fromRow;
+    if (fromColumn != null && fromRow != null) {
+      // Remove the old mark
+      newRows[fromRow] =
+        this._setColumn(newRows[fromRow], fromColumn, ' ');
+    }
+
     return new BoardModel(newRows);
   }
 }
