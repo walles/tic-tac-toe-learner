@@ -1,3 +1,4 @@
+//@flow
 import BoardModel from './BoardModel';
 import Move from './Move';
 
@@ -24,4 +25,29 @@ test('makes basic move', () => {
     '   ',
     ' o ',
     '   ']);
+});
+
+test('suggests moving to free spots', () => {
+  const board = new BoardModel([
+    'xox',
+    'o o',
+    'oxo']);
+  const move = board.suggestMove('x');
+
+  expect(move.player).toEqual('x');
+  expect([move.toColumn, move.toRow]).toEqual([1, 1]);
+});
+
+test('getMark() returns the right mark', () => {
+  const board = new BoardModel([
+    'xox',
+    'o o',
+    'oxo']);
+
+    expect(board.getMark(0, 0)).toEqual('x');
+    expect(board.getMark(1, 1)).toEqual(' ');
+    expect(board.getMark(2, 2)).toEqual('o');
+
+    expect(board.getMark(0, 2)).toEqual('o');
+    expect(board.getMark(2, 0)).toEqual('x');
 });
