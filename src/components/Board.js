@@ -10,7 +10,7 @@ class Board extends Component {
        player: 'x'
     };
 
-    window.setInterval(this.makeMove, 1000);
+    window.setInterval(this.makeMove, 3000);
   }
 
   render() {
