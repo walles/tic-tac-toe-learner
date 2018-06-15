@@ -38,6 +38,25 @@ test('suggests moving to free spots', () => {
   expect([move.toColumn, move.toRow]).toEqual([1, 1]);
 });
 
+test('suggests moving existing marks', () => {
+  const player = 'x';
+
+  const board = new BoardModel([
+    'xox',
+    'o o',
+    'oxo']);
+  const move = board.suggestMove(player);
+
+  expect(move.player).toEqual(player);
+  expect([move.toColumn, move.toRow]).toEqual([1, 1]);
+
+  expect(move.fromColumn).toEqual(expect.anything());
+  expect(move.fromRow).toEqual(expect.anything());
+
+  // $FlowFixMe: These are non-null, we just asserted on that on the lines above
+  expect(board.getMark(move.fromColumn, move.fromRow)).toEqual(player);
+});
+
 test('getMark() returns the right mark', () => {
   const board = new BoardModel([
     'xox',

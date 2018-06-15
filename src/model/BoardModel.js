@@ -2,6 +2,16 @@
 
 import Move from './Move';
 
+class Coordinate {
+  column: number;
+  row: number;
+
+  constructor(column, row) {
+    this.column = column;
+    this.row = row;
+  }
+};
+
 class BoardModel {
   rows: Array<string>;
 
@@ -20,16 +30,43 @@ class BoardModel {
     return this.rows[row].charAt(column);
   }
 
+  _getMarkCoordinates(player: string): Array<Coordinate> {
+    let coordinates = [];
+    for (let column = 0; column <= 2; column++) {
+      for (let row = 0; row <= 2; row++) {
+        const mark = this.getMark(column, row);
+        if (mark === player) {
+          coordinates.push(new Coordinate(column, row));
+        }
+      }
+    }
+
+    return coordinates;
+  }
+
   _getPossibleMoves(player: string): Array<Move> {
     let possibleMoves: Array<Move> = [];
     for (let column = 0; column <= 2; column++) {
       for (let row = 0; row <= 2; row++) {
         const mark = this.getMark(column, row);
         if (mark !== ' ') {
+          // Spot not free, never mind
           continue;
         }
 
-        possibleMoves.push(new Move(player, column, row, null, null));
+        const existingMarks = this._getMarkCoordinates(player);
+        if (existingMarks.length < 3) {
+          // Can still place new marks, do that
+          possibleMoves.push(new Move(player, column, row, null, null));
+          continue;
+        }
+
+        // We need to move an existing mark
+        for (const fromCoordinate of existingMarks) {
+          possibleMoves.push(new Move(player,
+            column, row,
+            fromCoordinate.column, fromCoordinate.row));
+        }
       }
     }
 
