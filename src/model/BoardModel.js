@@ -77,8 +77,12 @@ class BoardModel {
   * player - 'x' or 'o'
   */
   suggestMove(player: string) {
-    // FIXME: Pick one at random from the array?
-    return this._getPossibleMoves(player)[0];
+    const moves = this._getPossibleMoves(player);
+
+    // Randomization courtesy of StackOverflow...
+    const randomMove = moves[Math.floor(Math.random() * moves.length)];
+
+    return randomMove;
   }
 
   /*
