@@ -37,7 +37,7 @@ class Board extends Component<Props, State> {
 
   makeMove = () => {
     const player = this.state.player;
-    const move = this.state.board.suggestMove(player);
+    const move = this.state.board.suggestMove(player, 2);
     const newBoard = this.state.board.withMove(move);
     this.setState({
       board: newBoard,

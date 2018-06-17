@@ -46,7 +46,7 @@ test('suggests moving to free spots', () => {
     'xox',
     'o o',
     'oxo']);
-  const move = board.suggestMove('x');
+  const move = board.suggestMove('x', 2);
 
   expect(move.player).toEqual('x');
   expect([move.toColumn, move.toRow]).toEqual([1, 1]);
@@ -59,7 +59,7 @@ test('suggests moving existing marks', () => {
     'xox',
     'o o',
     'oxo']);
-  const move = board.suggestMove(player);
+  const move = board.suggestMove(player, 2);
 
   expect(move.player).toEqual(player);
   expect([move.toColumn, move.toRow]).toEqual([1, 1]);

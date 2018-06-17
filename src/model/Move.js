@@ -27,6 +27,15 @@ class Move {
     this.fromColumn = fromColumn;
     this.fromRow = fromRow;
   }
+
+  toString() {
+    const to = `(${this.toColumn}, ${this.toRow})`;
+    if (this.fromColumn != null && this.fromRow != null) {
+      const from = `(${this.fromColumn}, ${this.fromRow})`;
+      return `${this.player}: ${from}->${to}`;
+    }
+    return `${this.player}: ${to}`;
+  }
 }
 
 export default Move;
