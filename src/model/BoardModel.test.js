@@ -52,6 +52,17 @@ test('suggests moving to free spots', () => {
   expect([move.toColumn, move.toRow]).toEqual([1, 1]);
 });
 
+test('suggests preventing opponent from winning', () => {
+  const board = new BoardModel([
+    'xx ',
+    'o  ',
+    'o  ']);
+  const move = board.suggestMove('o', 2);
+
+  expect(move.player).toEqual('o');
+  expect([move.toColumn, move.toRow]).toEqual([2, 0]);
+});
+
 test('suggests moving existing marks', () => {
   const player = 'x';
 
