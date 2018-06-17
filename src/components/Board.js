@@ -1,7 +1,7 @@
 //@flow
 import React, { Component } from 'react';
 
-import BoardModel from '../model/BoardModel';
+import {BoardModel} from '../model/BoardModel';
 
 type State = {
   board: BoardModel;

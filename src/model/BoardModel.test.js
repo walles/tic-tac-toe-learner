@@ -1,5 +1,5 @@
 //@flow
-import BoardModel from './BoardModel';
+import {Coordinate, BoardModel} from './BoardModel';
 import Move from './Move';
 
 test('keeps track of rows', () => {
@@ -84,4 +84,70 @@ test('getMark() returns the right mark', () => {
 
     expect(board.getMark(0, 2)).toEqual('o');
     expect(board.getMark(2, 0)).toEqual('x');
+});
+
+test('getting the winning pattern without a winner', () => {
+  const board = new BoardModel([
+    'xox',
+    'o o',
+    'oxo']);
+
+  expect(board.getWinPattern()).toBeNull();
+});
+
+test('getting a horizontal winning pattern', () => {
+  const board = new BoardModel([
+    'xxx',
+    '   ',
+    '   ']);
+
+  const pattern = board.getWinPattern();
+  if (pattern == null) {
+    throw new Error('Winning pattern should have been non-null');
+  }
+
+  expect(pattern.player).toEqual('x');
+  expect(pattern.coordinates).toEqual([
+    new Coordinate(0, 0),
+    new Coordinate(1, 0),
+    new Coordinate(2, 0)
+  ]);
+});
+
+test('getting a vertical winning pattern', () => {
+  const board = new BoardModel([
+    '  o',
+    '  o',
+    '  o']);
+
+  const pattern = board.getWinPattern();
+  if (pattern == null) {
+    throw new Error('Winning pattern should have been non-null');
+  }
+
+  expect(pattern.player).toEqual('o');
+  expect(pattern.coordinates).toEqual([
+    new Coordinate(2, 0),
+    new Coordinate(2, 1),
+    new Coordinate(2, 2)
+  ]);
+});
+
+test('getting a diagonal winning pattern', () => {
+  const board = new BoardModel([
+    'xxo',
+    ' o ',
+    'o  ']);
+
+  const pattern = board.getWinPattern();
+  if (pattern == null) {
+    throw new Error('Winning pattern should have been non-null');
+  }
+
+  expect(pattern.player).toEqual('o');
+  expect(pattern.coordinates).toEqual([
+    new Coordinate(0, 2),
+    new Coordinate(1, 1),
+    new Coordinate(2, 0),
+  ]);
 });
