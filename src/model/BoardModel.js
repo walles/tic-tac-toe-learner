@@ -134,6 +134,12 @@ export class BoardModel {
   */
   suggestMove(player: string) {
     const moves = this._getPossibleMoves(player);
+    for (const move of moves) {
+      if (this.withMove(move).getWinPattern() != null) {
+        // Winning move, let's go!
+        return move;
+      }
+    }
 
     // Randomization courtesy of StackOverflow...
     const randomMove = moves[Math.floor(Math.random() * moves.length)];
