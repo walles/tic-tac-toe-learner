@@ -1,13 +1,23 @@
+//@flow
 import React, { Component } from 'react';
 
 import BoardModel from '../model/BoardModel';
 
-class Board extends Component {
-  constructor(props) {
+type State = {
+  board: BoardModel;
+  player: string; // 'x' or 'o'
+};
+
+type Props = {};
+
+class Board extends Component<Props, State> {
+  board: BoardModel;
+
+  constructor(props: Props) {
     super(props);
     this.state = {
-       board: new BoardModel(['   ', '   ', '   ']),
-       player: 'x'
+      board: new BoardModel(['   ', '   ', '   ']),
+      player: 'x'
     };
 
     window.setInterval(this.makeMove, 3000);

@@ -1,3 +1,4 @@
+//@flow
 import './App.css';
 
 import React, { Component } from 'react';
@@ -5,7 +6,11 @@ import React, { Component } from 'react';
 import Board from './components/Board';
 import logo from './logo.svg';
 
-class App extends Component {
+type Props = {
+  // This type intentionally left blank
+};
+
+class App extends Component<Props> {
   render() {
     return (
       <div className="App">
