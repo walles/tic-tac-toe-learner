@@ -29,12 +29,12 @@ class Move {
   }
 
   toString() {
-    const to = `(${this.toColumn}, ${this.toRow})`;
+    const to = `(${this.toColumn},${this.toRow})`;
     if (this.fromColumn != null && this.fromRow != null) {
-      const from = `(${this.fromColumn}, ${this.fromRow})`;
-      return `${this.player}: ${from}->${to}`;
+      const from = `(${this.fromColumn},${this.fromRow})`;
+      return `${this.player}:${from}->${to}`;
     }
-    return `${this.player}: ${to}`;
+    return `<${this.player}:${to}>`;
   }
 }
 

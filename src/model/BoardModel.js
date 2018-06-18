@@ -133,13 +133,10 @@ export class BoardModel {
   * player - 'x' or 'o'
   * ttl - how much we're allowed to recurse
   */
-  suggestMove(player: string, ttl: number): Move {
+  suggestMoves(player: string, ttl: number): Array<Move> {
     if (ttl <= 0) {
       throw new Error('Have no possible move');
     }
-
-    FIXME: Something is wrong in this method; if we play like this one player
-    wins after a while, which should not be possible
 
     const possibleMoves = this._getPossibleMoves(player);
     let acceptableMoves: Array<Move> = [];
@@ -148,7 +145,7 @@ export class BoardModel {
       const boardCandidate = this.withMove(move);
       if (boardCandidate.getWinPattern() != null) {
         // Winning move, let's go!
-        return move;
+        return [move];
       }
 
       if (ttl > 1) {
@@ -166,17 +163,19 @@ export class BoardModel {
       acceptableMoves.push(move);
     }
 
-    // Randomization courtesy of StackOverflow...
-    const candidateMoves: Array<Move> =
-      ((acceptableMoves.length > 0) ? acceptableMoves : badMoves);
-    const randomMove =
-      candidateMoves[Math.floor(Math.random() * candidateMoves.length)];
+    return ((acceptableMoves.length > 0) ? acceptableMoves : badMoves);
+  }
 
-    if (ttl === 2) {
-      // FIXME: Why do we need to call toString() explicitly here?
-      console.log("Acceptable: %o, bad: %o, actual move: <%s>",
-        acceptableMoves, badMoves, randomMove.toString());
-    }
+  /*
+  * player - 'x' or 'o'
+  * ttl - how much we're allowed to recurse
+  */
+  suggestMove(player: string, ttl: number): Move {
+    const moves = this.suggestMoves(player, ttl);
+
+    // Randomization courtesy of StackOverflow
+    const randomMove =
+      moves[Math.floor(Math.random() * moves.length)];
 
     return randomMove;
   }

@@ -57,10 +57,27 @@ test('suggests preventing opponent from winning', () => {
     'xx ',
     'o  ',
     'o  ']);
-  const move = board.suggestMove('o', 2);
+  const moves = board.suggestMoves('o', 2);
 
-  expect(move.player).toEqual('o');
-  expect([move.toColumn, move.toRow]).toEqual([2, 0]);
+  for (const move of moves) {
+    expect(move.player).toEqual('o');
+    expect([move.toColumn, move.toRow]).toEqual([2, 0]);
+  }
+});
+
+test('suggests preventing opponent from getting a winning layup', () => {
+  const board = new BoardModel([
+    'xo ',
+    'o  ',
+    'xxo']);
+  const moves = board.suggestMoves('x', 2);
+
+  const message = `All moves must go into (1, 1): ${moves.toString()}`;
+  for (const move of moves) {
+    // Otherwise 'o' will get two options for getting three in line, and will
+    // win in two moves no matter what we do
+    expect([message, move.toColumn, move.toRow]).toEqual([message, 1, 1]);
+  }
 });
 
 test('suggests moving existing marks', () => {
